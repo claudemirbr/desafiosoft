@@ -4,12 +4,12 @@ $(function() {
 		limpaTela();
 	});
 
-	$('a').click(function(e) {
+	$('#buscar').click(function(e) {
 		e.preventDefault();
 		$.ajax({
 			url: location.origin + '/api/pessoas',
 			method: 'GET',
-			data: { id: '', nome: '', cpf: '', any: '', page: 0, size: 0, sort: 'id' },
+			data: { id: '', nome: $('#f_nome').val(), cpf: '', any: '', page: 0, size: 0, sort: 'id' },
 			dataType: 'json'
 		}).done(function(result) {
 			findPessoa(result);
@@ -18,7 +18,8 @@ $(function() {
 
 	$('#salvar').click(function(e) {
 		//e.preventDefault();
-		if (valida_form() == true) {
+
+		if (isValidCPF($('#cpf').val())) {
 			var id = $('#id').val();
 			var data = {
 				nome: $('#nome').val(),
@@ -30,7 +31,7 @@ $(function() {
 				cpf: $('#cpf').val()
 			}
 			if (id == 0) {
-				console.log('inserindo');
+				//console.log('inserindo');
 				$.ajax({
 					url: location.origin + '/api/pessoas',
 					method: 'POST',
@@ -40,7 +41,7 @@ $(function() {
 					//console.log(result);
 				});
 			} else {
-				console.log('atualizando');
+				//console.log('atualizando');
 				$.ajax({
 					url: location.origin + '/api/pessoas/' + id,
 					method: 'PUT',
@@ -48,10 +49,11 @@ $(function() {
 					data: JSON.stringify(data)
 				}).done(function(result) {
 					//console.log(result);
+					findPessoa();
 				});
 			}
 		} else {
-			console.log('não válido');
+			alert('O cpf informado é inválido.');
 		}
 	});
 });
@@ -80,6 +82,7 @@ function del(p_id) {
 		}).done(function(result) {
 			console.log(result);
 			//carregaTela(result);
+			findPessoa();
 		});
 	}
 }
@@ -110,7 +113,7 @@ function findPessoa(result) {
 function carregaTela(result) {
 	$('#id').val(result.content[0].id);
 	$('#nome').val(result.content[0].nome);
-	$('#sexo').val(result.content[0].sexo);
+	$('#sexo').find('option[value=' + result.content[0].sexo + ']').prop('selected', 'selected');
 	$('#email').val(result.content[0].email);
 	$('#nascimento').val(result.content[0].nascimento);
 	$('#naturalidade').val(result.content[0].naturalidade);
@@ -129,11 +132,18 @@ function limpaTela() {
 	$('#cpf').val('');
 }
 
-function valida_form() {
-	if ($("#nome").text() == "") {
-		alert('Informe o nome');
-		$("nome").text('Informe um nome');
-		return false
-	}
-	return true;
+function isValidCPF(cpf) {
+	if (typeof cpf !== 'string') return false
+	cpf = cpf.replace(/[^\d]+/g, '')
+	if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false
+	cpf = cpf.split('')
+	const validator = cpf
+		.filter((digit, index, array) => index >= array.length - 2 && digit)
+		.map(el => +el)
+	const toValidate = pop => cpf
+		.filter((digit, index, array) => index < array.length - pop && digit)
+		.map(el => +el)
+	const rest = (count, pop) => (toValidate(pop)
+		.reduce((soma, el, i) => soma + el * (count - i), 0) * 10) % 11 % 10
+	return !(rest(10, 2) !== validator[0] || rest(11, 1) !== validator[1])
 }

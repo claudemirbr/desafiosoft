@@ -22,7 +22,6 @@ public class PessoaReq implements Serializable {
 	private String nacionalidade;
 	@NotBlank
 	private String cpf;
-	private String endereco;
 	
 	public Pessoa toModel(Pessoa pessoa) {
 		pessoa.setNome(nome);
@@ -32,7 +31,6 @@ public class PessoaReq implements Serializable {
 		pessoa.setNaturalidade(naturalidade);
 		pessoa.setNacionalidade(nacionalidade);
 		pessoa.setCpf(cpf);
-		pessoa.setEndereco(endereco);
 		return pessoa;
 	}
 
@@ -92,14 +90,4 @@ public class PessoaReq implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
 }

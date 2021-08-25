@@ -43,13 +43,14 @@
 
 
 	<!-- Custom styles for this template -->
-	<link href="/css/pricing.css" rel="stylesheet">
+	<!-- <link href="/css/pricing.css" rel="stylesheet"> -->
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-	<script src="/js/pessoa.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
 	<script src="/js/bootstrap.bundle.min.js"></script>
-
+	<script src="/js/pessoa.js"></script>
+	
 </head>
 
 <body>
@@ -73,28 +74,40 @@
 							d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
 							fill="currentColor"></path>
 					</svg>
-					<span class="fs-4">Desafio SoftPlan</span>
+					<span class="fs-4">Desafio SoftPlan Claudemir</span>
 				</a>
 
 				<nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-					<a class="me-3 py-2 text-dark text-decoration-none" href="#">Features</a>
-					<a class="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
-					<a class="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
-					<a class="py-2 text-dark text-decoration-none" href="#">Pricing</a>
+					<a class="me-3 py-2 text-dark text-decoration-none"
+						href="http://localhost:8080/swagger-ui">Swagger-UI</a>
+					<a class="me-3 py-2 text-dark text-decoration-none" href="https://github.com/claudemirbr">GitHub</a>
 				</nav>
 			</div>
 
-			<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+			<!--	<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
 				<h1 class="display-4 fw-normal">Desejo</h1>
 				O medo de cair não pode ser maior do que a paixão de voar...
 				<p class="fs-5 text-muted"></p>
-			</div>
+			</div> -->
 		</header>
 
 		<main>
 
-
 			<h2 class="display-6 text-center mb-4">Pessoas</h2>
+
+			<div class="form-group">
+				<label for="competencia">Buscar</label>
+				<input type="text" class="form-control" id="f_nome" name="f_nome">
+			</div>
+
+			<p></p>
+
+			<button class="btn btn-primary" id="buscar">Buscar</button>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+				id="novo">
+				Novo
+			</button>
 
 			<div class="table-responsive">
 				<table class="table">
@@ -111,64 +124,65 @@
 
 					</tbody>
 				</table>
-				<a class="btn btn-primary" href="#" role="button">Buscar</a>
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-					id="novo">
-					Novo
-				</button>
 			</div>
 		</main>
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Pessoa</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="mb-3">
-							<label for="nome" class="form-label">Nome</label>
-							<input type="text" class="form-control" id="nome">
+					<form id="formExemplo" data-toggle="validator" role="form">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Pessoa</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
-						<div class="mb-3">
-							<label for="sexo" class="form-label">Sexo</label>
-							<input type="text" class="form-control" id="sexo">
+						<div class="modal-body">
+							<div class="mb-3">
+								<label for="nome" class="form-label">Nome</label>
+								<input type="text" class="form-control" id="nome" required>
+							</div>
+							<div class="mb-3">
+								<label for="sexo" class="form-label">Sexo</label>
+								<select id="sexo" name="sexo" class="form-control">
+									<option value="S">Selecione</option>
+									<option value="F">Feminino</option>
+									<option value="M">Masculino</option>
+									<option value="O">Outro</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label for="email" class="form-label">Email</label>
+								<input type="email" class="form-control" id="email">
+							</div>
+							<div class="mb-3">
+								<label for="nascimento" class="form-label" required>Nascimento</label>
+								<input type="date" class="form-control" id="nascimento" required>
+							</div>
+							<div class="mb-3">
+								<label for="naturalidade" class="form-label">Naturalidade</label>
+								<input type="text" class="form-control" id="naturalidade">
+							</div>
+							<div class="mb-3">
+								<label for="nacionalidade" class="form-label">Nacionalidade</label>
+								<input type="text" class="form-control" id="nacionalidade">
+							</div>
+							<div class="mb-3">
+								<label for="cpf" class="form-label">CPF</label>
+								<input type="text" class="form-control" id="cpf" required>
+							</div>
+							<input type="hidden" id="id" name="id" value="0">
 						</div>
-						<div class="mb-3">
-							<label for="email" class="form-label">Email</label>
-							<input type="email" class="form-control" id="email">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+								id="cancelar">Cancelar</button>
+							<button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
 						</div>
-						<div class="mb-3">
-							<label for="nascimento" class="form-label" required>Nascimento</label>
-							<input type="date" class="form-control" id="nascimento">
-						</div>
-						<div class="mb-3">
-							<label for="naturalidade" class="form-label">Naturalidade</label>
-							<input type="text" class="form-control" id="naturalidade">
-						</div>
-						<div class="mb-3">
-							<label for="nacionalidade" class="form-label">Nacionalidade</label>
-							<input type="text" class="form-control" id="nacionalidade">
-						</div>
-						<div class="mb-3">
-							<label for="cpf" class="form-label" required>CPF</label>
-							<input type="text" class="form-control" id="cpf">
-						</div>
-						<input type="hidden" id="id" name="id" value="0">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-							id="cancelar">Cancelar</button>
-						<button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 
 		<footer class="pt-4 my-md-5 pt-md-5 border-top">
-			<div class="row">
+		<!--	<div class="row">
 				<div class="col-12 col-md">
 					<img class="mb-2" src="/img/bootstrap-logo.svg" alt="" width="24" height="19">
 					<small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
@@ -204,7 +218,7 @@
 						<li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 		</footer>
 	</div>
 

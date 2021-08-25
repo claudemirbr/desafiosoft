@@ -1,52 +1,42 @@
-package com.example.demo.dto.res;
+package com.example.demo.dto.req;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
+
+import javax.validation.constraints.NotBlank;
 
 import com.example.demo.model.Pessoa;
 
-public class PessoaRes implements Serializable {
+public class PessoaReqV2 implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3642217693910544174L;
-	private Long id;
+	private static final long serialVersionUID = -5226179488708780949L;
+	@NotBlank
 	private String nome;
 	private String sexo;
 	private String email;
 	private Date nascimento;
 	private String naturalidade;
 	private String nacionalidade;
+	@NotBlank
 	private String cpf;
-	private LocalDateTime createAt;
-	private LocalDateTime updatedAt;
-
-	public PessoaRes() {
-
+	@NotBlank
+	private String endereco;
+	
+	public Pessoa toModel(Pessoa pessoa) {
+		pessoa.setNome(nome);
+		pessoa.setSexo(sexo);
+		pessoa.setEmail(email);
+		pessoa.setNascimento(nascimento);
+		pessoa.setNaturalidade(naturalidade);
+		pessoa.setNacionalidade(nacionalidade);
+		pessoa.setCpf(cpf);
+		pessoa.setEndereco(endereco);
+		return pessoa;
 	}
 
-	public PessoaRes(Pessoa pessoa) {
-		this.id = pessoa.getId();
-		this.nome = pessoa.getNome();
-		this.sexo = pessoa.getSexo();
-		this.email = pessoa.getEmail();
-		this.nascimento = pessoa.getNascimento();
-		this.naturalidade = pessoa.getNaturalidade();
-		this.nacionalidade = pessoa.getNacionalidade();
-		this.cpf = pessoa.getCpf();
-		this.createAt = pessoa.getCreateAt();
-		this.updatedAt = pessoa.getUpdatedAt();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -104,20 +94,13 @@ public class PessoaRes implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public LocalDateTime getCreateAt() {
-		return createAt;
+
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
-		this.createAt = createAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 }

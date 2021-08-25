@@ -6,7 +6,7 @@ import java.util.Date;
 
 import com.example.demo.model.Pessoa;
 
-public class PessoaRes implements Serializable {
+public class PessoaResV2 implements Serializable {
 
 	/**
 	 * 
@@ -20,14 +20,15 @@ public class PessoaRes implements Serializable {
 	private String naturalidade;
 	private String nacionalidade;
 	private String cpf;
+	private String endereco;
 	private LocalDateTime createAt;
 	private LocalDateTime updatedAt;
 
-	public PessoaRes() {
+	public PessoaResV2() {
 
 	}
 
-	public PessoaRes(Pessoa pessoa) {
+	public PessoaResV2(Pessoa pessoa) {
 		this.id = pessoa.getId();
 		this.nome = pessoa.getNome();
 		this.sexo = pessoa.getSexo();
@@ -36,6 +37,7 @@ public class PessoaRes implements Serializable {
 		this.naturalidade = pessoa.getNaturalidade();
 		this.nacionalidade = pessoa.getNacionalidade();
 		this.cpf = pessoa.getCpf();
+		this.endereco = pessoa.getEndereco();
 		this.createAt = pessoa.getCreateAt();
 		this.updatedAt = pessoa.getUpdatedAt();
 	}
@@ -102,6 +104,14 @@ public class PessoaRes implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public LocalDateTime getCreateAt() {
