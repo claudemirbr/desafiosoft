@@ -1,0 +1,7 @@
+version: '3.3'
+
+services:
+  tomcat:
+    image: claudemir1/desafio-soft:1.0
+    ports:
+      - '8080:8080'

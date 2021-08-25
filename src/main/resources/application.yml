@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:h2:~/backend-spring-softplan;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  jpa: 
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    open-in-view: true
+    hibernate.ddl-auto: update
+ #   hibernate.ddl-auto: create-drop
+    properties: 
+      hibernate.format_sql: true
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+  main.lazy-initialization: true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: bd1c0a783ccdd1c9b9e4
+            client-secret: 1a9030fbca47a5b2c28e92f19050bb77824b5ad1
+  
+server.port: 8080
+
+springdoc.swagger-ui.path: /swagger-ui
+springdoc.swagger-ui.disable-swagger-default-url: true
